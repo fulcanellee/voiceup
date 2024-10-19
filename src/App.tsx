@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {socket} from "./socket";
 
 function App() {
+  useEffect(() => {
+    console.warn('mount')
+
+    socket.on('connect', ()=> {
+      console.warn('on Connect');
+      socket.send('Hello server');
+    });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
